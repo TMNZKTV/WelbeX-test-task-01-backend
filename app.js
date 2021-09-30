@@ -8,9 +8,11 @@ const { errorHandler } = require("./src/helpers/apiHelpers");
 
 const app = express();
 
+const formatsLogger = app.get("env") === "development" ? "dev" : "short";
+
 app.use(cors());
 app.use(express.json());
-app.use(morgan("tiny"));
+app.use(morgan(formatsLogger));
 
 app.use("/api", filesRouter);
 app.use(errorHandler);
